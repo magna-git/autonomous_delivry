@@ -1,0 +1,7 @@
+topics:
+  - topic: /scan
+    qos_profile:
+      reliability: best_effort
+      history: keep_last
+      depth: 10
+

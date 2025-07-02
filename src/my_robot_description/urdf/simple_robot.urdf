@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<robot name="box_bot">
+
+  <!-- Couleur pour les roues -->
+  <material name="black">
+    <color rgba="0 1 1 0"/>
+  </material>
+
+  <!-- Couleur pour le lidar -->
+  <material name="purple">
+    <color rgba="0.5 0.0 0.5 1.0"/>
+  </material>
+
+  <!-- Corps du robot -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.1"/>
+      <geometry>
+        <box size="0.4 0.4 0.2"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0.0 0.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Roue gauche -->
+  <link name="left_wheel">
+    <visual>
+      <origin xyz="0 0.20 0.0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.04"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <!-- Roue droite -->
+  <link name="right_wheel">
+    <visual>
+      <origin xyz="0 -0.20 0.0" rpy="1.5708 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.04"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <!-- Joint roue gauche -->
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <origin xyz="0 0.19 0.0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10.0" velocity="10.0"/>
+  </joint>
+
+  <!-- Joint roue droite -->
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <origin xyz="0 -0.19 0.0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="10.0" velocity="10.0"/>
+  </joint>
+
+  <!-- Lidar (LiDAR) -->
+  <link name="laser">
+    <visual>
+      <!-- On place le lidar au centre, légèrement au-dessus du robot -->
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.03" length="0.02"/>
+      </geometry>
+      <material name="purple"/>
+    </visual>
+  </link>
+
+  <!-- Joint fixe entre la base et le lidar -->
+  <joint name="laser_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="laser"/>
+    <origin xyz="0 0 0.21" rpy="0 0 0"/>
+  </joint>
+
+</robot>
